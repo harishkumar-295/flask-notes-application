@@ -3,6 +3,24 @@
 {% block title %}Home{% endblock %}
 
 {% block content %}
-<h1>{{text}}</h1>
-<h2>{{user.first_name}}</h2>
+<h1>{{text}}{{user.first_name}}</h1>
+<br />
+<h3>Notes</h3>
+<ul class="list-group list-group-flush" id="notes">
+    {% for note in user.notes %}
+    <li class="list-group-item">
+        {{note.data}}
+        <button class="close" onClick="deleteNote({{ note.id }})">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </li>
+    {% endfor%}
+</ul>
+<form method = 'POST'>
+    <textarea name="note" id="note" class = "form-control"></textarea>
+    <br />
+    <div align="center">
+        <button type="submit" class="btn btn-primary">Add Note</button>
+    </div>
+</form>
 {% endblock %}
